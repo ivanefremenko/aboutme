@@ -1,0 +1,938 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Belosnezhnik — Portfolio</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;600;700&display=swap');
+
+:root {
+    --bg: #080e0c;
+    --panel: #0b1411;
+    --panel-light: #101b16;
+    --green: #35b96a;
+    --green-dark: #174b30;
+    --border: #1b4830;
+    --text: #d0d8d1;
+    --muted: #77827b;
+    --sidebar-width: 175px;
+    --footer-height: 52px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Roboto Mono', monospace;
+    min-height: 100vh;
+    font-size: 13px;
+}
+
+/* =========================
+   SIDEBAR
+========================= */
+
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: var(--footer-height);
+    width: var(--sidebar-width);
+    background: #090f0d;
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    z-index: 10;
+}
+
+.logo {
+    height: 143px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid var(--border);
+    color: var(--green);
+    font-size: 55px;
+}
+
+.logo span {
+    text-shadow: 0 0 15px #35b96a55;
+}
+
+.navigation {
+    display: flex;
+    flex-direction: column;
+    padding-top: 0;
+}
+
+.nav-button {
+    width: 100%;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    gap: 17px;
+    padding: 0 20px;
+    border: none;
+    border-left: 3px solid transparent;
+    background: transparent;
+    color: var(--muted);
+    font-family: inherit;
+    font-size: 12px;
+    text-align: left;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.nav-button:hover {
+    color: var(--green);
+    background: #102019;
+}
+
+.nav-button.active {
+    color: var(--green);
+    background: #14281e;
+    border-left-color: var(--green);
+}
+
+.nav-icon {
+    width: 22px;
+    font-size: 21px;
+    text-align: center;
+}
+
+.sidebar-bottom {
+    margin-top: auto;
+    height: 175px;
+    border-top: 1px solid var(--border);
+    background:
+        linear-gradient(0deg, #09120d 5%, transparent 100%),
+        url("bg2.png") center bottom / cover no-repeat;
+    opacity: .5;
+}
+
+/* =========================
+   MAIN
+========================= */
+
+.main {
+    margin-left: var(--sidebar-width);
+    margin-bottom: var(--footer-height);
+    min-height: calc(100vh - var(--footer-height));
+}
+
+/* =========================
+   HERO / BACKGROUND
+========================= */
+
+.hero {
+    min-height: 395px;
+    position: relative;
+    padding: 85px 36px 30px;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(5, 12, 9, .98) 0%,
+            rgba(5, 12, 9, .85) 37%,
+            rgba(5, 12, 9, .25) 100%
+        ),
+        linear-gradient(
+            0deg,
+            #080e0c 0%,
+            transparent 35%
+        ),
+        url("bg.png");
+
+    background-size: cover;
+    background-position: center;
+    border-bottom: 1px solid #10271b;
+}
+
+.online {
+    position: absolute;
+    top: 20px;
+    right: 26px;
+    color: var(--green);
+    font-size: 11px;
+}
+
+.online-dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background: var(--green);
+    border-radius: 50%;
+    margin-left: 10px;
+    box-shadow: 0 0 10px var(--green);
+}
+
+.hero h1 {
+    font-size: clamp(30px, 4vw, 57px);
+    font-weight: 700;
+    color: #e0e8df;
+    letter-spacing: -2px;
+    text-shadow: 2px 3px 0 #53625855;
+    margin-bottom: 5px;
+}
+
+.cursor {
+    color: var(--green);
+}
+
+.subtitle {
+    font-size: 18px;
+    color: var(--green);
+    margin-bottom: 22px;
+}
+
+.hero-line {
+    height: 2px;
+    max-width: 420px;
+    background: linear-gradient(90deg, var(--green-dark), transparent);
+    margin-bottom: 23px;
+}
+
+.description {
+    color: #aab4ad;
+    font-size: 14px;
+    line-height: 1.65;
+    max-width: 440px;
+}
+
+.primary-button {
+    display: inline-block;
+    margin-top: 27px;
+    padding: 11px 22px;
+    background: transparent;
+    border: 1px solid var(--green);
+    color: var(--green);
+    font-family: inherit;
+    font-size: 12px;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.primary-button:hover {
+    background: var(--green);
+    color: #07100b;
+    box-shadow: 0 0 15px #35b96a44;
+}
+
+/* =========================
+   PAGE CONTENT
+========================= */
+
+.page {
+    display: none;
+    animation: appear .25s ease;
+}
+
+.page.active {
+    display: block;
+}
+
+@keyframes appear {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.page-header {
+    padding: 25px 32px 0;
+}
+
+.page-header h2 {
+    font-size: 23px;
+    color: var(--green);
+    margin-bottom: 8px;
+}
+
+.page-header p {
+    color: var(--muted);
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 15px;
+    padding: 0 32px 24px;
+    margin-top: 15px;
+}
+
+.card {
+    min-height: 230px;
+    background: rgba(11, 20, 16, .88);
+    border: 1px solid var(--border);
+    padding: 15px;
+    transition: .2s;
+}
+
+.card:hover {
+    border-color: var(--green-dark);
+}
+
+.card-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 14px;
+    color: #d5ded6;
+    margin-bottom: 16px;
+}
+
+.card-icon {
+    color: var(--green);
+    font-size: 21px;
+}
+
+.card-text {
+    color: #9da89f;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.card-details {
+    margin-top: 23px;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.detail-icon {
+    color: var(--green);
+    margin-right: 10px;
+}
+
+/* =========================
+   SKILLS
+========================= */
+
+.skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+}
+
+.skill {
+    padding: 6px 12px;
+    color: #b9c7bb;
+    border: 1px solid #245c39;
+    background: #102119;
+    font-size: 11px;
+    cursor: default;
+    clip-path: polygon(
+        8px 0, 100% 0, 100% calc(100% - 8px),
+        calc(100% - 8px) 100%, 0 100%, 0 8px
+    );
+}
+
+.skill:hover {
+    color: var(--green);
+    border-color: var(--green);
+}
+
+/* =========================
+   PROJECTS
+========================= */
+
+.empty-projects {
+    min-height: 160px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 10px;
+}
+
+.empty-icon {
+    font-size: 42px;
+    opacity: .5;
+}
+
+.empty-projects p {
+    color: #b9c4ba;
+}
+
+.empty-projects small {
+    color: var(--muted);
+}
+
+.card-button {
+    margin-top: 16px;
+    padding: 7px 13px;
+    background: transparent;
+    color: var(--green);
+    border: 1px solid var(--green-dark);
+    font-family: inherit;
+    font-size: 11px;
+    cursor: pointer;
+}
+
+.card-button:hover {
+    background: var(--green);
+    color: black;
+}
+
+/* =========================
+   OTHER PAGES
+========================= */
+
+.inner-content {
+    padding: 25px 32px;
+}
+
+.inner-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    padding: 22px;
+    margin-bottom: 15px;
+}
+
+.inner-card h3 {
+    color: var(--green);
+    margin-bottom: 12px;
+}
+
+.inner-card p {
+    color: #9da89f;
+    line-height: 1.8;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: var(--footer-height);
+    background: #080f0c;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 22px;
+    z-index: 20;
+}
+
+.footer-left {
+    color: #52745e;
+    font-size: 11px;
+}
+
+.footer-links {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+}
+
+.footer-links a {
+    text-decoration: none;
+    color: #52745e;
+    font-size: 17px;
+    font-weight: bold;
+    transition: .2s;
+}
+
+.footer-links a:hover {
+    color: var(--green);
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 950px) {
+    .cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 650px) {
+    :root {
+        --sidebar-width: 65px;
+    }
+
+    .logo {
+        height: 80px;
+        font-size: 30px;
+    }
+
+    .nav-button {
+        justify-content: center;
+        padding: 0;
+        height: 55px;
+    }
+
+    .nav-button span:last-child {
+        display: none;
+    }
+
+    .nav-icon {
+        font-size: 20px;
+    }
+
+    .sidebar-bottom {
+        display: none;
+    }
+
+    .hero {
+        min-height: 340px;
+        padding: 75px 20px 25px;
+    }
+
+    .hero h1 {
+        font-size: 30px;
+    }
+
+    .subtitle {
+        font-size: 13px;
+    }
+
+    .description {
+        font-size: 12px;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
+        padding: 0 15px 20px;
+    }
+
+    .page-header {
+        padding: 20px 15px;
+    }
+
+    .footer {
+        padding: 0 10px;
+    }
+
+    .footer-links {
+        gap: 12px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- =========================
+     SIDEBAR
+========================= -->
+
+<aside class="sidebar">
+
+    <div class="logo">
+        <span>✥</span>
+    </div>
+
+    <nav class="navigation">
+
+        <button class="nav-button active"
+            onclick="openPage('home', this)">
+            <span class="nav-icon">◆</span>
+            <span>Главная</span>
+        </button>
+
+        <button class="nav-button"
+            onclick="openPage('about', this)">
+            <span class="nav-icon">●</span>
+            <span>Обо мне</span>
+        </button>
+
+        <button class="nav-button"
+            onclick="openPage('projects', this)">
+            <span class="nav-icon">▣</span>
+            <span>Проекты</span>
+        </button>
+
+        <button class="nav-button"
+            onclick="openPage('skills', this)">
+            <span class="nav-icon">⚙</span>
+            <span>Навыки</span>
+        </button>
+
+        <button class="nav-button"
+            onclick="openPage('links', this)">
+            <span class="nav-icon">↗</span>
+            <span>Ссылки</span>
+        </button>
+
+        <button class="nav-button"
+            onclick="openPage('contacts', this)">
+            <span class="nav-icon">✉</span>
+            <span>Контакты</span>
+        </button>
+
+        <button class="nav-button"
+            onclick="openPage('blog', this)">
+            <span class="nav-icon">▤</span>
+            <span>Блог</span>
+        </button>
+
+    </nav>
+
+    <div class="sidebar-bottom"></div>
+
+</aside>
+
+
+<!-- =========================
+     MAIN
+========================= -->
+
+<main class="main">
+
+    <!-- HERO -->
+    <header class="hero">
+
+        <div class="online">
+            // Online <span class="online-dot"></span>
+        </div>
+
+        <h1>Belosnezhnik<span class="cursor">_</span></h1>
+
+        <div class="subtitle">
+            Разработчик • Геймер • Энтузиаст
+        </div>
+
+        <div class="hero-line"></div>
+
+        <p class="description">
+            Привет! Я Belosnezhnik.<br>
+            Здесь ты можешь узнать больше обо мне,<br>
+            моих проектах, интересах и найти ссылки.
+        </p>
+
+        <button class="primary-button"
+            onclick="openPage('about',
+            document.querySelectorAll('.nav-button')[1])">
+            ↓ &nbsp; Узнать больше
+        </button>
+
+    </header>
+
+
+    <!-- =========================
+         HOME PAGE
+    ========================= -->
+
+    <section class="page active" id="home">
+
+        <div class="cards">
+
+            <!-- ABOUT CARD -->
+            <article class="card">
+
+                <div class="card-title">
+                    <span class="card-icon">★</span>
+                    <span>Обо мне</span>
+                </div>
+
+                <p class="card-text">
+                    Я — разработчик, геймер и просто
+                    человек, которому нравится изучать
+                    новые технологии, играть в игры
+                    и создавать что-то своё.
+                </p>
+
+                <div class="card-details">
+                    <div><span class="detail-icon">🎮</span>
+                        Любимые игры: D&D, стратегии, RPG
+                    </div>
+                    <div><span class="detail-icon">〈/〉</span>
+                        Интересы: программирование, игры, сеттинг, технологии
+                    </div>
+                    <div><span class="detail-icon">♥</span>
+                        Любимое: зелёный цвет, дождь
+                    </div>
+                </div>
+
+            </article>
+
+
+            <!-- SKILLS CARD -->
+            <article class="card">
+
+                <div class="card-title">
+                    <span class="card-icon">▥</span>
+                    <span>Навыки</span>
+                </div>
+
+                <div class="skills">
+                    <span class="skill">Python</span>
+                    <span class="skill">C#</span>
+                    <span class="skill">C++</span>
+                    <span class="skill">Godot</span>
+                    <span class="skill">HTML / CSS</span>
+                    <span class="skill">JavaScript</span>
+                    <span class="skill">Linux</span>
+                    <span class="skill">Blender</span>
+                    <span class="skill">Git</span>
+                    <span class="skill">SQL</span>
+                    <span class="skill">D&D</span>
+                    <span class="skill">Игры</span>
+                    <span class="skill">Пиксель-арт</span>
+                    <span class="skill">И многое другое...</span>
+                </div>
+
+            </article>
+
+
+            <!-- PROJECTS CARD -->
+            <article class="card">
+
+                <div class="card-title">
+                    <span class="card-icon">▣</span>
+                    <span>Мои проекты</span>
+                </div>
+
+                <div class="empty-projects">
+                    <span class="empty-icon">🎮</span>
+                    <p>Здесь пока пусто...</p>
+                    <small>Но скоро тут появятся мои проекты!</small>
+
+                    <button class="card-button"
+                        onclick="openPage('projects',
+                        document.querySelectorAll('.nav-button')[2])">
+                        Перейти к проектам →
+                    </button>
+                </div>
+
+            </article>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         ABOUT PAGE
+    ========================= -->
+
+    <section class="page" id="about">
+
+        <div class="page-header">
+            <h2>Обо мне</h2>
+            <p>// Немного информации обо мне</p>
+        </div>
+
+        <div class="inner-content">
+
+            <div class="inner-card">
+                <h3>Привет!</h3>
+                <p>
+                    Здесь можно разместить подробную
+                    информацию о себе, своих увлечениях,
+                    интересах и занятиях.
+                </p>
+            </div>
+
+            <div class="inner-card">
+                <h3>Мои интересы</h3>
+                <p>Программирование, игры, технологии,
+                творчество и многое другое.</p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         PROJECTS PAGE
+    ========================= -->
+
+    <section class="page" id="projects">
+
+        <div class="page-header">
+            <h2>Мои проекты</h2>
+            <p>// Мои разработки и работы</p>
+        </div>
+
+        <div class="inner-content">
+            <div class="inner-card">
+                <h3>Проект 01</h3>
+                <p>Описание проекта.</p>
+            </div>
+
+            <div class="inner-card">
+                <h3>Проект 02</h3>
+                <p>Описание проекта.</p>
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         SKILLS PAGE
+    ========================= -->
+
+    <section class="page" id="skills">
+
+        <div class="page-header">
+            <h2>Навыки</h2>
+            <p>// Технологии и инструменты</p>
+        </div>
+
+        <div class="inner-content">
+            <div class="inner-card">
+                <h3>Мои навыки</h3>
+                <div class="skills">
+                    <span class="skill">Python</span>
+                    <span class="skill">C#</span>
+                    <span class="skill">C++</span>
+                    <span class="skill">Godot</span>
+                    <span class="skill">HTML / CSS</span>
+                    <span class="skill">JavaScript</span>
+                    <span class="skill">Linux</span>
+                    <span class="skill">Blender</span>
+                    <span class="skill">Git</span>
+                    <span class="skill">SQL</span>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         LINKS PAGE
+    ========================= -->
+
+    <section class="page" id="links">
+
+        <div class="page-header">
+            <h2>Ссылки</h2>
+            <p>// Мои ресурсы в интернете</p>
+        </div>
+
+        <div class="inner-content">
+            <div class="inner-card">
+                <h3>Полезные ссылки</h3>
+                <p>Здесь будут располагаться ссылки.</p>
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         CONTACTS PAGE
+    ========================= -->
+
+    <section class="page" id="contacts">
+
+        <div class="page-header">
+            <h2>Контакты</h2>
+            <p>// Связаться со мной</p>
+        </div>
+
+        <div class="inner-content">
+            <div class="inner-card">
+                <h3>Мои контакты</h3>
+                <p>Здесь можно разместить контактную информацию.</p>
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         BLOG PAGE
+    ========================= -->
+
+    <section class="page" id="blog">
+
+        <div class="page-header">
+            <h2>Блог</h2>
+            <p>// Новости и публикации</p>
+        </div>
+
+        <div class="inner-content">
+            <div class="inner-card">
+                <h3>Записи</h3>
+                <p>Здесь пока нет публикаций.</p>
+            </div>
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer class="footer">
+
+    <div class="footer-left">
+        ☰ &nbsp; // Спасибо, что заглянул! Сайт сделан при помощи ИИ, мне нравится как выглядит а значит оставляем.
+    </div>
+
+    <div class="footer-links">
+        <a href="#" title="Telegram">✈</a>
+        <a href="#" title="VK">VK</a>
+        <a href="#" title="YouTube">▶</a>
+        <a href="#" title="GitHub">◉</a>
+        <a href="#" title="Steam">♟</a>
+    </div>
+
+</footer>
+
+
+<!-- =========================
+     JAVASCRIPT
+========================= -->
+
+<script>
+
+function openPage(pageId, button) {
+
+    // Скрываем все страницы
+    document.querySelectorAll('.page').forEach(page => {
+        page.classList.remove('active');
+    });
+
+    // Убираем активное состояние кнопок
+    document.querySelectorAll('.nav-button').forEach(btn => {
+        btn.classList.remove('active');
+    });
+
+    // Показываем выбранную страницу
+    const page = document.getElementById(pageId);
+
+    if (page) {
+        page.classList.add('active');
+    }
+
+    // Подсвечиваем выбранную кнопку
+    if (button) {
+        button.classList.add('active');
+    }
+
+    // Возвращаем прокрутку вверх
+    document.querySelector('.main').scrollTop = 0;
+}
+
+</script>
+
+</body>
+</html>
